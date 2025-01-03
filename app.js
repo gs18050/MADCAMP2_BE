@@ -6,7 +6,6 @@ const bodyParser = require("body-parser");
 const userRoutes = require("./routes/userRoutes");
 const bucketListRoutes = require("./routes/bucketListRoutes");
 const horoscopeRoutes = require("./routes/horoscopeRoutes");
-const galleryRoutes = require("./routes/galleryRoutes");
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -17,9 +16,8 @@ app.use(bodyParser.json());
 
 // Routes
 app.use("/api/users", userRoutes);
-app.use("/api/bucketlists", bucketListRoutes);
+app.use("/api/buckets", bucketListRoutes);
 app.use("/api/horoscopes", horoscopeRoutes);
-app.use("/api/galleries", galleryRoutes);
 
 // MongoDB 연결
 async function connectToDB() {
