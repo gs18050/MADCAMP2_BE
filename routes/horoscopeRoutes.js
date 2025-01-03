@@ -40,14 +40,31 @@ router.get("/:sign", async (req, res) => {
 			return res.status(404).json({ message: "Horoscope not found" });
 	  	}
 
+		const today = new Date().toISOString().split("T")[0];
+
+		if (horoscope.dailyFortune &&
+			horoscope.dailyFortune.date &&
+			horoscope.dailyFortune.date.toISOString().split("T")[0] === today) {
+			console.log("Returning cached fortune");
+			return res.status(200).json({
+			  	sign: horoscope.sign,
+			  	dailyFortune: horoscope.dailyFortune,
+			});
+		}
+
 		const prompt = "별자리 "+sign+"의 오늘의 운세 알려줘"
 		const answer = await askChatGPT(prompt)
+		console.log("Asked Chat-GPT")
+		horoscope.dailyFortune = {
+			date: new Date(),
+			content: answer,
+			updatedAt: new Date(),
+		};
+		await horoscope.save();
+	  
 		res.status(200).json({
 			sign: horoscope.sign,
-			dailyFortune: {
-				date: new Date(),
-				content: answer,
-			},
+			dailyFortune: horoscope.dailyFortune,
 		});
 	} catch (err) {
 		console.error("Failed to fetch horoscope for sign:", err.message);
