@@ -1,0 +1,23 @@
+{
+  "name": "madcamp2_be",
+  "version": "1.0.0",
+  "description": "MADCAMP week2 BE Code",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gs18050/MADCAMP2_BE.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gs18050/MADCAMP2_BE/issues"
+  },
+  "homepage": "https://github.com/gs18050/MADCAMP2_BE#readme",
+  "dependencies": {
+    "express": "^4.21.2",
+    "mongodb": "^6.12.0"
+  }
+}
