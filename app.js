@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+const cors = require("cors");
 
 const userRoutes = require("./routes/userRoutes");
 const bucketListRoutes = require("./routes/bucketListRoutes");
@@ -11,7 +12,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 const uri = process.env.DB_URL;
 
-// Middleware
+app.use(cors());
 app.use(bodyParser.json());
 
 // Routes
@@ -31,7 +32,7 @@ async function connectToDB() {
 };
 
 // 서버 실행
-app.listen(port, async () => {
+app.listen(port, '0.0.0.0', async () => {
     console.log(`Server running on port: ${port}`);
 	await connectToDB();
 });

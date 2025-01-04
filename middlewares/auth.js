@@ -1,4 +1,4 @@
-/*const jwt = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 
 const authenticate = async (req, res, next) => {
@@ -24,9 +24,9 @@ const authenticate = async (req, res, next) => {
     }
 };
 
-module.exports = authenticate;*/
+module.exports = authenticate;
 
-const User = require("../models/User");
+/*const User = require("../models/User");
 
 const authenticate = async (req, res, next) => {
   // 임시 사용자 정보 추가 (Google 로그인 구현 전 테스트용)
@@ -36,4 +36,4 @@ const authenticate = async (req, res, next) => {
   next();
 };
 
-module.exports = authenticate;
+module.exports = authenticate;*/
