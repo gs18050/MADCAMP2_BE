@@ -72,8 +72,6 @@ router.get("/me", authenticate, async (req, res) => {
             return res.status(404).json({ error: "User not found." });
         }
 
-		console.log(email)
-
         res.status(200).json({
             id: user._id,
             email: user.email,

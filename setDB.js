@@ -18,9 +18,9 @@ async function putOneData() {
         const collection = db.collection("horoscopes")
 
         const data = {
-            sign: "양자리",
-            period: { start: "03/21", end: "04/19" },
-            image: "https://example.com/aries.jpg",
+            sign: "물고기자리",
+            period: { start: "02/19", end: "03/20" },
+            image: "https://example.com/Pisces.jpg",
         };
 
         const result = await collection.insertOne(data);

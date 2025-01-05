@@ -15,10 +15,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 const uri = process.env.DB_URL;
 
-app.use(cors({
-    origin: process.env.FRONTEND_URL, // 프론트엔드 주소
-    credentials: true
-}));
+app.use(cors());
 app.use(bodyParser.json());
 
 // Routes

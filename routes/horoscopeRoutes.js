@@ -52,9 +52,14 @@ router.get("/:sign", async (req, res) => {
 			});
 		}
 
-		const prompt = "별자리 "+sign+"의 오늘의 운세 알려줘"
+		const prompt = "별자리 "+sign+"의 오늘의 운세 알려줘. 앞에 ~의 운세는 뭐일거 같아요 이런 문장 빼고 오로지 운세만."
 		const answer = await askChatGPT(prompt)
 		console.log("Asked Chat-GPT")
+
+		if (answer.includes(":")) {
+            answer = answer.split(":").slice(1).join(":").trim();
+        }
+
 		horoscope.dailyFortune = {
 			date: new Date(),
 			content: answer,
