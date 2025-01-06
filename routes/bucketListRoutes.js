@@ -53,14 +53,17 @@ router.get("/friend", authenticate, async (req, res) => {
 
     try {
         // 친구 정보 가져오기
+		console.log("Friend email: "+friendEmail)
+		const user = await User.findById(req.user.id);
         const friend = await User.findOne({ email: friendEmail });
 
         if (!friend) {
             return res.status(404).json({ message: "Friend not found." });
         }
-
+		
+		console.log("Current user: "+user.email)
         // 현재 사용자의 친구 목록에서 확인
-        const isFriend = req.user.friends.some(
+        const isFriend = user.friends.some(
             (friendEntry) => friendEntry.friend_email === friend.email
         );
 
