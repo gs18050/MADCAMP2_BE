@@ -99,9 +99,11 @@ router.patch("/:id/complete", authenticate, async (req, res) => {
 	}
 });
 
-router.delete("/:id", authenticate, async (req, res) => {
+router.delete("/:id/delete", authenticate, async (req, res) => {
 	try {
         const { id } = req.params;
+
+		console.log('Deleting '+id)
 
         // 삭제할 버킷리스트 항목 찾기
         const bucket = await BucketList.findOne({ _id: id, userId: req.user.id });
