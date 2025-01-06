@@ -82,6 +82,8 @@ router.patch("/:id/complete", authenticate, async (req, res) => {
 	try {
 		const { id } = req.params;
 
+		console.log(id+" "+req.user.id)
+
 		const bucket = await BucketList.findOne({ _id: id, userId: req.user.id });
 		if (!bucket) {
 			return res.status(404).json({ message: "Bucket not found" });
@@ -96,5 +98,24 @@ router.patch("/:id/complete", authenticate, async (req, res) => {
 		res.status(500).json({ message: "Failed to update bucket", error: err.message });
 	}
 });
+
+router.delete("/:id", authenticate, async (req, res) => {
+	try {
+        const { id } = req.params;
+
+        // 삭제할 버킷리스트 항목 찾기
+        const bucket = await BucketList.findOne({ _id: id, userId: req.user.id });
+        if (!bucket) {
+            return res.status(404).json({ message: "Bucket not found or unauthorized access." });
+        }
+
+        // 삭제
+        await BucketList.deleteOne({ _id: id });
+        res.status(200).json({ message: "Bucket successfully deleted." });
+    } catch (err) {
+        console.error("Failed to delete bucket:", err.message);
+        res.status(500).json({ message: "Failed to delete bucket.", error: err.message });
+    }
+})
 
 module.exports = router;
