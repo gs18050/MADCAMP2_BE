@@ -5,20 +5,19 @@ const authenticate = require("../middlewares/auth");
 const router = express.Router();
 
 router.post("/", authenticate, async (req, res) => {
-	const { content, targetDate, planet, position } = req.body
+	const { content, modelPath, position } = req.body
 
 	try {
-		if (!content || !targetDate || !planet || !position) {
+		console.log(content)
+		if (!content || !modelPath || !position) {
 			return res.status(400).json({message: "Requirements not statisfied"});
 		}
-
-		const user = await User.findById(req.user.id);
+		//console.log(req.user.id)
 		
 		const bucket = new BucketList({
-			userId: user._id,
+			userId: req.user.id,
 			content,
-			targetDate,
-			planet,
+			modelPath,
 			position
 		})
 
@@ -32,12 +31,13 @@ router.post("/", authenticate, async (req, res) => {
 router.get("/", authenticate, async (req, res) => {
 	try {
 		const { completed } = req.query;
-		const filter = { userId: req.user._id }
+		const filter = { userId: req.user.id }
+
 		if (completed !== undefined) {
 			filter.isCompleted = completed == "true";
 		}
 
-		const buckets = await BucketList.find().populate("userId");
+		const buckets = await BucketList.find(filter).populate("userId");
 		res.json(buckets);
 	} catch (err) {
 		res.status(500).json({ error: err.message });
@@ -48,7 +48,7 @@ router.patch("/:id/complete", authenticate, async (req, res) => {
 	try {
 		const { id } = req.params;
 
-		const bucket = await BucketList.findOne({ _id: id, userId: req.user._id });
+		const bucket = await BucketList.findOne({ _id: id, userId: req.user.id });
 		if (!bucket) {
 			return res.status(404).json({ message: "Bucket not found" });
 		}
