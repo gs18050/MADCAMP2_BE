@@ -65,4 +65,100 @@ router.get("/me", authenticate, async (req, res) => {
     }
 });
 
+router.post("/me/sendRequest", authenticate, async (req, res) => {
+    const { targetEmail } = req.body;
+
+    if (!targetEmail) {
+        return res.status(400).json({ message: "Target email is required." });
+    }
+
+    try {
+        const targetUser = await User.findOne({ email: targetEmail });
+        if (!targetUser) {
+            return res.status(404).json({ message: "User not found." });
+        }
+
+        // 이미 친구거나 요청이 존재하는지 확인
+        if (
+            targetUser.friends.some((friend) => friend.friend_email === req.user.email) ||
+            targetUser.requests.some((request) => request.request_email === req.user.email)
+        ) {
+            return res.status(400).json({ message: "Request already sent or user is already a friend." });
+        }
+
+        targetUser.requests.push({
+            request_email: req.user.email,
+            request_name: req.user.name,
+        });
+        await targetUser.save();
+
+        res.status(200).json({ message: "Friend request sent." });
+    } catch (err) {
+        res.status(500).json({ message: "Failed to send friend request.", error: err.message });
+    }
+});
+
+router.post("/me/addFriend", authenticate, async (req, res) => {
+    const { requesterEmail } = req.body;
+
+    if (!requesterEmail) {
+        return res.status(400).json({ message: "Requester email is required." });
+    }
+
+    try {
+        const requester = await User.findOne({ email: requesterEmail });
+        if (!requester) {
+            return res.status(404).json({ message: "Requester not found." });
+        }
+
+        const currentUser = await User.findById(req.user.id);
+
+        // 요청 존재 여부 확인
+        const requestIndex = currentUser.requests.findIndex(
+            (request) => request.request_email === requesterEmail
+        );
+
+        if (requestIndex === -1) {
+            return res.status(400).json({ message: "No friend request from this user." });
+        }
+
+        // 요청 삭제 및 친구 추가
+        currentUser.requests.splice(requestIndex, 1);
+        currentUser.friends.push({
+            friend_email: requester.email,
+            friend_name: requester.name,
+        });
+        await currentUser.save();
+
+        // 상대방 친구 목록에도 추가
+        requester.friends.push({
+            friend_email: currentUser.email,
+            friend_name: currentUser.name,
+        });
+        await requester.save();
+
+        res.status(200).json({ message: "Friend added successfully." });
+    } catch (err) {
+        res.status(500).json({ message: "Failed to add friend.", error: err.message });
+    }
+});
+
+router.get("/me/friends", authenticate, async (req, res) => {
+    try {
+        const user = await User.findById(req.user.id).select("friends");
+        res.status(200).json(user.friends);
+    } catch (err) {
+        res.status(500).json({ message: "Failed to fetch friends.", error: err.message });
+    }
+});
+
+router.get("/me/requests", authenticate, async (req, res) => {
+    try {
+        const user = await User.findById(req.user.id).select("requests");
+        res.status(200).json(user.requests);
+    } catch (err) {
+        res.status(500).json({ message: "Failed to fetch requests.", error: err.message });
+    }
+});
+
 module.exports = router;

@@ -18,13 +18,9 @@ async function clearDB() {
         console.log("Connected to DB")
 
         const db = await client.db(process.env.DB_NAME)
-        const collections = await db.listCollections().toArray()
-        for (const collection of collections) {
-            const col = db.collection(collection.name);
-            await col.deleteMany({})
-            console.log('Cleared collection '+collection.name)
-        }
-        console.log('Data deletion finished')
+        const col = db.collection("bucketlists");
+        await col.deleteMany({})
+        console.log('Cleared collection '+collection.name)
 
     } catch(err) {
         console.error("Error:", err)

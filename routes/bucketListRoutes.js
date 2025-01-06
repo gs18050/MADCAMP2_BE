@@ -44,6 +44,40 @@ router.get("/", authenticate, async (req, res) => {
 	}
 });
 
+router.get("/friend", authenticate, async (req, res) => {
+	const { friendEmail } = req.query;
+
+    if (!friendEmail) {
+        return res.status(400).json({ message: "Friend email is required." });
+    }
+
+    try {
+        // 친구 정보 가져오기
+        const friend = await User.findOne({ email: friendEmail });
+
+        if (!friend) {
+            return res.status(404).json({ message: "Friend not found." });
+        }
+
+        // 현재 사용자의 친구 목록에서 확인
+        const isFriend = req.user.friends.some(
+            (friendEntry) => friendEntry.friend_email === friend.email
+        );
+
+        if (!isFriend) {
+            return res.status(403).json({ message: "The user is not your friend." });
+        }
+
+        // 친구의 버킷리스트 가져오기
+        const friendBuckets = await BucketList.find({ userId: friend._id });
+
+        res.status(200).json(friendBuckets);
+    } catch (err) {
+        console.error("Failed to fetch friend's bucket list:", err.message);
+        res.status(500).json({ message: "Failed to fetch friend's bucket list.", error: err.message });
+    }
+});
+
 router.patch("/:id/complete", authenticate, async (req, res) => {
 	try {
 		const { id } = req.params;
