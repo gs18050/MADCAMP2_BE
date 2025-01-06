@@ -39,17 +39,18 @@ router.get("/:sign", async (req, res) => {
 	  	if (!horoscope) {
 			return res.status(404).json({ message: "Horoscope not found" });
 	  	}
+		
+		const offset = 1000 * 60 * 60 * 9
+		const today = new Date((new Date()).getTime() + offset).toISOString().split("T")[0];
 
-		const today = new Date().toISOString().split("T")[0];
-
-		if (horoscope.dailyFortune &&
-			horoscope.dailyFortune.date &&
-			horoscope.dailyFortune.date.toISOString().split("T")[0] === today) {
-			console.log("Returning cached fortune");
-			return res.status(200).json({
-			  	sign: horoscope.sign,
-			  	dailyFortune: horoscope.dailyFortune,
-			});
+		if (horoscope.dailyFortune && horoscope.dailyFortune.date) {
+			if (new Date((horoscope.dailyFortune.date).getTime() + offset).toISOString().split("T")[0] === today) {
+				console.log("Returning cached fortune");
+				return res.status(200).json({
+					sign: horoscope.sign,
+					dailyFortune: horoscope.dailyFortune,
+				});
+			}
 		}
 
 		const prompt = "별자리 "+sign+"의 오늘의 운세 알려줘. 앞에 ~의 운세는 뭐일거 같아요 이런 문장 빼고 오로지 운세만."
