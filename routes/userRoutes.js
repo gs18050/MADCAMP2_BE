@@ -2,28 +2,10 @@ const express = require("express");
 const axios = require("axios");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
+const authenticate = require("../middlewares/auth");
 const router = express.Router();
 
 const JWT_SECRET = process.env.JWT_SECRET;
-
-// Middleware for authentication
-const authenticate = async (req, res, next) => {
-    const authHeader = req.headers.authorization;
-
-    if (!authHeader || !authHeader.startsWith("Bearer ")) {
-        return res.status(401).json({ error: "Authorization token is missing or invalid." });
-    }
-
-    const token = authHeader.split(" ")[1];
-    try {
-        const decoded = jwt.verify(token, JWT_SECRET);
-        req.user = decoded; // Attach user info to request
-        next();
-    } catch (error) {
-        console.error("Token verification failed:", error.message);
-        return res.status(401).json({ error: "Invalid token." });
-    }
-};
 
 // Route for Google Authentication
 router.post("/auth/google", async (req, res) => {

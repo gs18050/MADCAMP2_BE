@@ -1,4 +1,5 @@
 const express = require("express");
+const User = require("../models/User");
 const BucketList = require("../models/BucketList");
 const authenticate = require("../middlewares/auth");
 const router = express.Router();
@@ -10,9 +11,11 @@ router.post("/", authenticate, async (req, res) => {
 		if (!content || !targetDate || !planet || !position) {
 			return res.status(400).json({message: "Requirements not statisfied"});
 		}
+
+		const user = await User.findById(req.user.id);
 		
 		const bucket = new BucketList({
-			userId: req.user._id,
+			userId: user._id,
 			content,
 			targetDate,
 			planet,
