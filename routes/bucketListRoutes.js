@@ -82,15 +82,15 @@ router.patch("/:id/complete", authenticate, async (req, res) => {
 	try {
 		const { id } = req.params;
 
-		console.log(id+" "+req.user.id)
-
 		const bucket = await BucketList.findOne({ _id: id, userId: req.user.id });
 		if (!bucket) {
 			return res.status(404).json({ message: "Bucket not found" });
 		}
 
-		bucket.isCompleted = !bucket.isCompleted;
-		bucket.completedAt = bucket.isCompleted ? new Date() : null;
+		if (!bucket.isCompleted) {
+			bucket.isCompleted = !bucket.isCompleted;
+			bucket.completedAt = bucket.isCompleted ? new Date() : null;
+		}
 
 		const updatedBucket = await bucket.save();
 		res.status(200).json(updatedBucket);
