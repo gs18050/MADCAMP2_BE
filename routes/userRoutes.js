@@ -73,6 +73,9 @@ router.post("/me/sendRequest", authenticate, async (req, res) => {
     }
 
     try {
+        console.log("Sending request to "+targetEmail)
+
+        const user = await User.findById(req.user.id);
         const targetUser = await User.findOne({ email: targetEmail });
         if (!targetUser) {
             return res.status(404).json({ message: "User not found." });
@@ -80,17 +83,24 @@ router.post("/me/sendRequest", authenticate, async (req, res) => {
 
         // 이미 친구거나 요청이 존재하는지 확인
         if (
-            targetUser.friends.some((friend) => friend.friend_email === req.user.email) ||
-            targetUser.requests.some((request) => request.request_email === req.user.email)
+            targetUser.friends.some((friend) => friend.friend_email === user.email) ||
+            targetUser.requests.some((request) => request.request_email === user.email)
         ) {
             return res.status(400).json({ message: "Request already sent or user is already a friend." });
         }
-
+        console.log("Making request", user.email, user.name, targetUser.email, targetUser.name)
         targetUser.requests.push({
-            request_email: req.user.email,
-            request_name: req.user.name,
+            request_email: user.email,
+            request_name: user.name,
         });
-        await targetUser.save();
+
+        try {
+            await targetUser.save();
+            console.log("Request saved successfully");
+        } catch (saveError) {
+            console.error("Error saving target user:", saveError);
+            return res.status(500).json({ message: "Failed to save friend request.", error: saveError.message });
+        }
 
         res.status(200).json({ message: "Friend request sent." });
     } catch (err) {
@@ -136,6 +146,40 @@ router.post("/me/addFriend", authenticate, async (req, res) => {
             friend_name: currentUser.name,
         });
         await requester.save();
+
+        res.status(200).json({ message: "Friend added successfully." });
+    } catch (err) {
+        res.status(500).json({ message: "Failed to add friend.", error: err.message });
+    }
+});
+
+router.post("/me/refuse", authenticate, async (req, res) => {
+    const { requesterEmail } = req.body;
+
+    if (!requesterEmail) {
+        return res.status(400).json({ message: "Requester email is required." });
+    }
+
+    try {
+        const requester = await User.findOne({ email: requesterEmail });
+        if (!requester) {
+            return res.status(404).json({ message: "Requester not found." });
+        }
+
+        const currentUser = await User.findById(req.user.id);
+
+        // 요청 존재 여부 확인
+        const requestIndex = currentUser.requests.findIndex(
+            (request) => request.request_email === requesterEmail
+        );
+
+        if (requestIndex === -1) {
+            return res.status(400).json({ message: "No friend request from this user." });
+        }
+
+        // 요청 삭제 및 친구 추가
+        currentUser.requests.splice(requestIndex, 1);
+        await currentUser.save();
 
         res.status(200).json({ message: "Friend added successfully." });
     } catch (err) {

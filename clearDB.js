@@ -30,4 +30,24 @@ async function clearDB() {
     }
 }
 
-clearDB()
+async function clearFriends() {
+    try {
+        await client.connect();
+        console.log("Connected to DB");
+
+        const db = await client.db(process.env.DB_NAME);
+        const collectionName = "users";
+        const col = db.collection(collectionName);
+
+        const result = await col.updateMany({}, { $set: { friends: [] } });
+        console.log(`Updated ${result.modifiedCount} documents in ${collectionName}`);
+
+    } catch (err) {
+        console.error("Error:", err);
+    } finally {
+        await client.close();
+    }
+}
+
+//clearDB()
+clearFriends()
