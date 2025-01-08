@@ -49,5 +49,5 @@ async function clearFriends() {
     }
 }
 
-//clearDB()
-clearFriends()
+clearDB()
+//clearFriends()
