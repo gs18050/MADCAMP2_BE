@@ -18,15 +18,15 @@
 
 ---
 
-[김다연](https://www.notion.so/fe3912cd997140ad885e5c31b11124b3?pvs=21) **(한양대 정보시스템학22, FE)**
+[김다연](https://www.notion.so/fe3912cd997140ad885e5c31b11124b3?pvs=21) **(한양대 정보시스템학과22, FE)**
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/f6cb388f-3934-47d6-9928-26d2e10eb0fc/e2354f2e-c66e-4a5f-b956-97eb23932abc/image.png)
+<img src="https://github.com/user-attachments/assets/7cc85024-de71-41a0-9695-bfed466eb808">
 
 [kingdayeon - Overview](https://github.com/kingdayeon)
 
-[박준호](https://www.notion.so/abd6a3ef013e45038b1fafa5f2ca111c?pvs=21) **(카이스트 21, BE)**
+[박준호](https://www.notion.so/abd6a3ef013e45038b1fafa5f2ca111c?pvs=21) **(카이스트 전산학과21, BE)**
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/f6cb388f-3934-47d6-9928-26d2e10eb0fc/485804dd-0560-46c2-a776-0ed65a5eede6/image.png)
+<img src="https://github.com/user-attachments/assets/bdd0c962-f5f3-4278-8828-9285c91da392">
 
 [gs18050 - Overview](https://github.com/gs18050)
 
@@ -34,7 +34,7 @@
 
 ---
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/f6cb388f-3934-47d6-9928-26d2e10eb0fc/e86b49dd-f646-49a6-bd29-419ddad65538/image.png)
+<img src="https://github.com/user-attachments/assets/a7c2d68f-c0e1-4cca-90dc-e5379b15b659">
 
 - **협업툴 :** Github
 - **FE :** React + TypeScript
@@ -79,11 +79,11 @@
 
 **DB 구조**
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/f6cb388f-3934-47d6-9928-26d2e10eb0fc/0f72e23b-e891-444b-8999-47a3f761e029/image.png)
+<img src="https://github.com/user-attachments/assets/448a05fd-6323-4828-bd0a-0b38c065fa6a">
 
 **타입 정의**
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/f6cb388f-3934-47d6-9928-26d2e10eb0fc/1771459f-6f83-4cba-80de-56aa5dba99ba/image.png)
+<img src="https://github.com/user-attachments/assets/a223e85e-5ff8-4451-80ce-d80547c02102">
 
 ## Landing 🌌
 
