@@ -4,6 +4,8 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 const authenticate = require("../middlewares/auth");
 const router = express.Router();
+const { OAuth2Client } = require("google-auth-library");
+const client = new OAuth2Client(process.env.GOOGLE_ID);
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
@@ -16,31 +18,22 @@ router.post("/auth/google", async (req, res) => {
     }
 
     try {
-        // Verify Google token
-        const googleResponse = await axios.get(`https://oauth2.googleapis.com/tokeninfo?id_token=${googleToken}`);
-        const { sub: googleId, email, name } = googleResponse.data;
+        const ticket = await client.verifyIdToken({
+            idToken: googleToken,
+            audience: process.env.GOOGLE_CLIENT_ID,
+        });
+        const { sub: googleId, email, name } = ticket.getPayload();
 
-        if (!googleId || !email || !name) {
-            return res.status(400).json({ error: "Invalid Google token data received." });
-        }
-
-        // Find or create user
         let user = await User.findOne({ googleId });
-
         if (!user) {
             user = new User({ googleId, email, name });
             await user.save();
         }
 
-        // Generate JWT
         const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: "1h" });
-
-        res.status(200).json({ user: { id: user._id, email: user.email, name: user.name }, token });
+        res.status(200).json({ user: { id: user._id, email, name }, token });
     } catch (error) {
         console.error("Google login error:", error.message);
-        if (error.response) {
-            console.error("Google API error:", error.response.data);
-        }
         res.status(500).json({ error: "Failed to process Google login." });
     }
 });
@@ -152,6 +145,54 @@ router.post("/me/addFriend", authenticate, async (req, res) => {
         res.status(500).json({ message: "Failed to add friend.", error: err.message });
     }
 });
+
+router.post("/me/deleteFriend", authenticate, async (req, res) => {
+    const { friendEmail } = req.body;
+
+    if (!friendEmail) {
+        return res.status(400).json({ message: "Friend email is required." });
+    }
+
+    try {
+        // Find the friend by email
+        const friend = await User.findOne({ email: friendEmail });
+        if (!friend) {
+            return res.status(404).json({ message: "Friend not found." });
+        }
+
+        // Find the current user
+        const currentUser = await User.findById(req.user.id);
+
+        // Check if the friend exists in the current user's friend list
+        const currentUserFriendIndex = currentUser.friends.findIndex(
+            (bud) => bud.friend_email === friendEmail
+        );
+
+        if (currentUserFriendIndex === -1) {
+            return res.status(400).json({ message: "Not a friend." });
+        }
+
+        // Remove friend from current user's list
+        currentUser.friends.splice(currentUserFriendIndex, 1);
+        await currentUser.save();
+
+        // Remove current user from the friend's friend list
+        const friendIndex = friend.friends.findIndex(
+            (bud) => bud.friend_email === currentUser.email
+        );
+
+        if (friendIndex !== -1) {
+            friend.friends.splice(friendIndex, 1);
+            await friend.save();
+        }
+
+        res.status(200).json({ message: "Friend deleted successfully from both lists." });
+    } catch (err) {
+        console.error("Error deleting friend:", err.message);
+        res.status(500).json({ message: "Failed to delete friend.", error: err.message });
+    }
+});
+
 
 router.post("/me/refuse", authenticate, async (req, res) => {
     const { requesterEmail } = req.body;
