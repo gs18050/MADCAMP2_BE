@@ -121,7 +121,7 @@ My space는 버킷리스트를 추가할 수 있는 **3D 우주 공간**을 보�
 
 ---
 
-<img src="https://github.com/user-attachments/assets/7b9f34d9-7deb-4a43-8b39-2b727428b865">
+https://github.com/user-attachments/assets/7b9f34d9-7deb-4a43-8b39-2b727428b865
 
 <aside>
 👾
@@ -134,7 +134,7 @@ Gallery는 3*3 형태의 랜덤한 우주 관련 이미지를 불러옵니다. �
 
 ---
 
-<img src="https://github.com/user-attachments/assets/6efe62a1-16c8-4803-9759-753270ee6ece">
+https://github.com/user-attachments/assets/6efe62a1-16c8-4803-9759-753270ee6ece
 
 <aside>
 👾
@@ -147,7 +147,7 @@ Horoscope 탭에서는 별자리에 따른 오늘의 운세를 점쳐볼 수 있
 
 ---
 
-<img src="https://github.com/user-attachments/assets/ab48b63d-2192-4f07-bc92-e1e7b12ea57">
+https://github.com/user-attachments/assets/ab48b63d-2192-4f07-bc92-e1e7b12ea57
 
 <aside>
 👾
@@ -160,7 +160,7 @@ Friend 탭은 친구 목록 및 그 친구의 버킷리스트, 달성상태를 �
 
 ---
 
-<img src="https://github.com/user-attachments/assets/4ab34595-2fd6-4257-a8bd-9379e1eef763">
+https://github.com/user-attachments/assets/4ab34595-2fd6-4257-a8bd-9379e1eef763
 
 <aside>
 👾
