@@ -1,5 +1,7 @@
 # Project Hail Mary : Outline 🌌
 
+<img src="https://github.com/user-attachments/assets/dad47502-cf38-4b93-8088-79158a2d3c8a">
+
 ---
 
 ## 🌠 당신만의 우주를 만들어보세요
@@ -89,9 +91,9 @@
 
 ---
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/f6cb388f-3934-47d6-9928-26d2e10eb0fc/fa65db91-41ec-42f3-9c7e-1604d0ff548e/572f361f-a24d-4887-9916-8988638f8dd1.png)
+<img src="https://github.com/user-attachments/assets/45fe8150-1de5-4b8f-9bb6-c3222eb86f9e">
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/f6cb388f-3934-47d6-9928-26d2e10eb0fc/303df72b-2767-4c97-b61e-c095a7b696ff/51a3913b-225a-4248-af28-59ea20262c22.png)
+<img src="https://github.com/user-attachments/assets/eee256eb-b7d7-40a1-a986-d8fb8ed03e6e">
 
 <aside>
 👾
@@ -104,7 +106,9 @@
 
 ---
 
-[Myspace_011.mp4](https://prod-files-secure.s3.us-west-2.amazonaws.com/f6cb388f-3934-47d6-9928-26d2e10eb0fc/5bde0740-92cb-4e08-9338-fc34ffe76211/Myspace_011.mp4)
+<img src="https://github.com/user-attachments/assets/63d723fa-a1a2-4f69-9480-23c8e30b45fe">
+
+<img src="https://github.com/user-attachments/assets/28b4d308-d035-43b4-8210-167bff5c6c7e">
 
 <aside>
 👾
@@ -117,7 +121,7 @@ My space는 버킷리스트를 추가할 수 있는 **3D 우주 공간**을 보�
 
 ---
 
-[Gallery_Real.mp4](https://prod-files-secure.s3.us-west-2.amazonaws.com/f6cb388f-3934-47d6-9928-26d2e10eb0fc/5f264a08-01ef-40d5-9213-37feb76306ac/Gallery_Real.mp4)
+<img src="https://github.com/user-attachments/assets/7b9f34d9-7deb-4a43-8b39-2b727428b865">
 
 <aside>
 👾
@@ -130,7 +134,7 @@ Gallery는 3*3 형태의 랜덤한 우주 관련 이미지를 불러옵니다. �
 
 ---
 
-[Horoscope_Real.mp4](https://prod-files-secure.s3.us-west-2.amazonaws.com/f6cb388f-3934-47d6-9928-26d2e10eb0fc/43a2f1e7-3077-4a96-a121-19009a2158f6/Horoscope_Real.mp4)
+<img src="https://github.com/user-attachments/assets/6efe62a1-16c8-4803-9759-753270ee6ece">
 
 <aside>
 👾
@@ -143,7 +147,7 @@ Horoscope 탭에서는 별자리에 따른 오늘의 운세를 점쳐볼 수 있
 
 ---
 
-[Friend_Real.mp4](https://prod-files-secure.s3.us-west-2.amazonaws.com/f6cb388f-3934-47d6-9928-26d2e10eb0fc/0c793b15-f7bd-4675-9e88-a84dde2a2940/Friend_Real.mp4)
+<img src="https://github.com/user-attachments/assets/ab48b63d-2192-4f07-bc92-e1e7b12ea57">
 
 <aside>
 👾
@@ -156,7 +160,7 @@ Friend 탭은 친구 목록 및 그 친구의 버킷리스트, 달성상태를 �
 
 ---
 
-[Mypage_Rrreal.mp4](https://prod-files-secure.s3.us-west-2.amazonaws.com/f6cb388f-3934-47d6-9928-26d2e10eb0fc/1cdbad3a-9530-46b3-aee2-35392ea74a56/Mypage_Rrreal.mp4)
+<img src="https://github.com/user-attachments/assets/4ab34595-2fd6-4257-a8bd-9379e1eef763">
 
 <aside>
 👾
