@@ -147,7 +147,7 @@ Horoscope 탭에서는 별자리에 따른 오늘의 운세를 점쳐볼 수 있
 
 ---
 
-https://github.com/user-attachments/assets/ab48b63d-2192-4f07-bc92-e1e7b12ea57
+https://github.com/user-attachments/assets/a3709822-310d-4079-a916-7445de8b9c06
 
 <aside>
 👾
